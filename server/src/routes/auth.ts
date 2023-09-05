@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import userMiddleware from "../middlewares/user";
 import authMiddleware from "../middlewares/auth";
+
 const mapError = (errors: Object[]) => {
   return errors.reduce((prev: any, err: any) => {
     prev[err.property] = Object.entries(err.constraints)[0][1];
@@ -116,6 +117,7 @@ const logout = async (_: Request, res: Response) => {
   );
   res.status(200).json({ success: true });
 };
+
 
 const router = Router();
 router.get("/me", userMiddleware, authMiddleware, me);

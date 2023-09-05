@@ -16,7 +16,7 @@ const getSub = async (req: Request, res: Response) => {
   try {
     const sub = await Sub.findOneByOrFail({ name });
 
-    //포스트를 생성한 후에 해당 sub에 속하는 포스트 정보들을 넣어주기
+    // 포스트를 생성한 후에 해당 sub에 속하는 포스트 정보들을 넣어주기
     const posts = await Post.find({
       where: { subName: sub.name },
       order: { createdAt: "DESC" },
@@ -178,7 +178,7 @@ const uploadSubImage = async (req: Request, res: Response) => {
 
 const router = Router();
 
-router.get(":/name", userMiddleware, getSub);
+router.get("/:name", userMiddleware, getSub);
 router.post("/", userMiddleware, authMiddleware, createSub);
 router.get("/sub/topSubs", topSubs);
 router.post(
@@ -189,5 +189,4 @@ router.post(
   upload.single("file"),
   uploadSubImage
 );
-
 export default router;
